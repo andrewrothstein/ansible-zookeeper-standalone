@@ -11,6 +11,4 @@ zookeeper_datalog_subdir: data-log
 zookeeper_max_client_cnxns: 60
 
 zookeeper_network_iface: eth0
-zookeeper_quorum_group_name: zookeeper-quorum
-zookeeper_observer_group_name: zookeeper-observer
 

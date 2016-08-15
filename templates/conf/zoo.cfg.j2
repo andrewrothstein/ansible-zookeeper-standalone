@@ -28,13 +28,4 @@ maxClientCnxns={{zookeeper_max_client_cnxns}}
 # Set to "0" to disable auto purge feature
 #autopurge.purgeInterval=1
 
-{% if inventory_hostname in groups[zookeeper_observer_group_name] %}
-peerType=observer
-{% endif %}
-
-{% for host in groups[zookeeper_quorum_group_name] %}
-server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + hostvars[host]['zookeeper_network_iface']]['ipv4']['address']}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}
-{% endfor %}
-{% for host in groups[zookeeper_observer_group_name] %}
-server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + hostvars[host]['zookeeper_network_iface']]['ipv4']['address']}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}:observer
-{% endfor %}
+server.{{zookeeper_myid}}={{hostvars[inventory_hostname]['ansible_' + hostvars[inventory_hostname]['zookeeper_network_iface']]['ipv4']['address']}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}
